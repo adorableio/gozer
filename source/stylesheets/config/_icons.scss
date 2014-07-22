@@ -1,0 +1,15 @@
+/******************************************************************************/
+// config/_icons.scss
+//
+// DESCRIPTION: Configuration for the icon fonts
+//
+// $icon-name: the base filename for the icon font
+// $icon-path: the relative path to the icon font file (used in asset-path)
+// $icons: list of names and character maps used in the icon class and mixin
+
+$icon-name: 'itg';
+$icon-path: 'fonts/';
+
+$icons: tv "\e600",
+        plane "\e601",
+        truck "\e602";

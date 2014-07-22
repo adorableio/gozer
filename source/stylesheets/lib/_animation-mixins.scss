@@ -1,0 +1,49 @@
+/******************************************************************************/
+// _animation.scss
+//
+// DESCRIPTION: a set of mixins to simplify cross-browser animation
+
+$vendor: '', '-webkit-', '-moz-', '-ms-', '-o-';
+
+@mixin animation-timing-function($name) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-timing-function: $name;
+  }
+}
+
+@mixin animation-name($name) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-name: $name;
+  }
+}
+
+@mixin animation-fill-mode($mode) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-fill-mode: $mode;
+  }
+}
+
+@mixin animation-duration($duration) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-duration: $duration;
+  }
+}
+
+@mixin animation-iteration-count($value) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-iteration-count: $value;
+  }
+}
+
+@mixin animation-delay($value) {
+  @each $prefix in $vendor {
+      #{$prefix}animation-delay: $value;
+  }
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} { @content; }
+  @-moz-keyframes #{$name} { @content; }
+  @-ms-keyframes #{$name} { @content; }
+  @keyframes #{$name} { @content; }
+}

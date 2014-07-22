@@ -1,0 +1,13 @@
+/******************************************************************************/
+// function.scss
+//
+// DESCRIPTION: Generic functions for use throughout the SCSS
+
+@function get-list-value($list, $key) {
+  @each $item in $list {
+    @if ($key == nth($item, 1)) {
+      @return nth($item, 2);
+    }
+  }
+  @return false;
+}

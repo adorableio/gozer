@@ -1,0 +1,49 @@
+/******************************************************************************/
+// partials/_sections-module.scss
+//
+// DESCRIPTION: Some pretty typical definitions for making full width colored
+// background sections.
+//
+//
+
+
+@mixin section($module, $shadowed: false, $centered: false, $image: false, $fixed: false) {
+  @extend %#{$module}-section;
+  @if $shadowed { @extend %shadowed-section; }
+  @if $centered { @extend %centered-section; }
+  @if $image {
+    @include background-size(cover);
+    background-image: image-url($image);
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  @if $fixed { background-attachment: fixed; }
+}
+
+%off-black-section {
+  color: $white;
+  background-color: $off-black;
+}
+%black-section {
+  color: $white;
+  background-color: $black;
+}
+%off-white-section {
+  color: $black;
+  background-color: $off-white;
+}
+%white-section {
+  color: $black;
+  background-color: $white;
+}
+%shadowed-section { box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.16); }
+%centered-section { text-align: center; }
+
+section {
+  &.off-black { @include section(off-black); }
+  &.black { @include section(black); }
+  &.off-white { @include section(off-white); }
+  &.white { @include section(white); }
+  &.shadowed { @include section(shadowed); }
+  &.centered { @include section(centered); }
+}
