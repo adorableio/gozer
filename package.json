@@ -1,0 +1,30 @@
+{
+  "name": "tecsst",
+  "version": "0.0.0",
+  "description": "## Run the server",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:itsthatguy/tecsst.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coffee-script": "^1.7.1"
+  },
+  "devDependencies": {
+    "assert": "^1.1.1",
+    "casperjs": "^1.1.0-beta3",
+    "cssom": "^0.3.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^1.20.1",
+    "phantomcss": "^0.7.2",
+    "phantomjs": "^1.9.7-14",
+    "run-command": "^0.1.4",
+    "should": "^4.0.4",
+    "zombie": "^2.0.0-alpha31"
+  }
+}
