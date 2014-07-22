@@ -7,9 +7,10 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1")
     = favicon_tag '/favicon.ico'
     = stylesheet_link_tag "site.css"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
     = yield_content :head
+    %title MyWay!
   %body(class="#{page_classes}")
-    = partial "navigation"
     #main(role="main")
       = yield
 
