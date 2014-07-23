@@ -6,7 +6,7 @@ url = 'http://localhost:4567'
 describe 'Load page: http://localhost:4567 and', ->
   browser  = null
   testOpts =
-    title: 'AcmeCredit'
+    title: 'My Way!'
 
   before ->
     browser = new Browser()
