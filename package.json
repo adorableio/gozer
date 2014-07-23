@@ -20,6 +20,7 @@
     "cssom": "^0.3.0",
     "expect.js": "^0.3.1",
     "mocha": "^1.20.1",
+    "phantom": "^0.6.5",
     "phantomcss": "^0.7.2",
     "phantomjs": "^1.9.7-14",
     "run-command": "^0.1.4",
