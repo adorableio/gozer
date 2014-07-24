@@ -3,9 +3,9 @@ phantom = require('phantom')
 
 visitUrl = (url, callback) ->
   phantom.create (ph) ->
-    ph.createPage (pg) ->
-      pg.open url, (status) ->
-        callback(pg)
+    ph.createPage (page) ->
+      page.open url, (status) ->
+        callback(page)
 
 describe 'On page: http://localhost:4567 and', ->
   page = null
