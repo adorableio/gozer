@@ -1,5 +1,5 @@
-expect     = require('expect.js')
-Browser    = require('zombie')
+expect = require('chai').expect
+phantom = require('phantom')
 
 url = 'http://localhost:4567'
 
