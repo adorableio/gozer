@@ -1,25 +1,30 @@
 expect = require('chai').expect
 phantom = require('phantom')
 
-url = 'http://localhost:4567'
+visitUrl = (url, callback) ->
+  phantom.create (ph) ->
+    ph.createPage (pg) ->
+      pg.open url, (status) ->
+        callback(pg)
 
-describe 'Load page: http://localhost:4567 and', ->
-  browser  = null
-  testOpts =
-    title: 'MyWay!'
+describe 'On page: http://localhost:4567 and', ->
+  page = null
 
-  before ->
-    browser = new Browser()
-    return browser.visit url
+  before (done) ->
+    visitUrl 'http://localhost:4567', (pg) ->
+      page = pg
+      done()
 
-  it "is expected to have a title of '#{testOpts.title}'", (done) ->
-    expect(browser.text("title")).to.equal(testOpts.title)
-    done()
+  describe 'testing HTML', ->
+    it 'retrieves the page title', (done) ->
+      page.evaluate (-> document.title), (result) ->
+        expect(result).to.equal('MyWay!')
+        done()
 
-  it "should have a title of '#{testOpts.title}'", (done) ->
-    browser.text("title").should.equal(testOpts.title)
-    done()
-
-  it "should have a white background on the body", (done) ->
-    browser.assert.style('#main', 'background', 'white')
-    done()
+  describe 'testing CSS', ->
+    it 'retrieves computed styles', (done) ->
+      page.evaluate (->
+        getComputedStyle(document.body).getPropertyValue('font-family')
+      ), (result) ->
+        expect(result).to.have.string('Helvetica Neue')
+        done()
