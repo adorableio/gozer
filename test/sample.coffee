@@ -16,15 +16,13 @@ describe 'On page: http://localhost:4567 and', ->
       done()
 
   describe 'testing HTML', ->
-    it 'retrieves the page title', (done) ->
+    it 'retrieves the page title', ->
       page.evaluate (-> document.title), (result) ->
         expect(result).to.equal('MyWay!')
-        done()
 
   describe 'testing CSS', ->
-    it 'retrieves computed styles', (done) ->
+    it 'retrieves computed styles', ->
       page.evaluate (->
         getComputedStyle(document.body).getPropertyValue('font-family')
       ), (result) ->
         expect(result).to.have.string('Helvetica Neue')
-        done()
