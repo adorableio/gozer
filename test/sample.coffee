@@ -15,14 +15,15 @@ describe 'On page: http://localhost:4567 and', ->
       page = pg
       done() # Can we make this default behavior?
 
-  describe 'testing HTML', ->
-    it 'retrieves the page title', ->
+  describe 'the HTML', ->
+    it 'has a title', ->
       page.evaluate (-> document.title), (result) ->
         expect(result).to.equal('MyWay!')
 
-  describe 'testing CSS', ->
-    it 'retrieves computed styles', ->
-      page.evaluate (->
-        getComputedStyle(document.body).getPropertyValue('font-family')
-      ), (result) ->
-        expect(result).to.have.string('Helvetica Neue')
+  describe 'the CSS', ->
+    describe 'for the body', ->
+      it 'has a font-family', ->
+        page.evaluate (->
+          getComputedStyle(document.body).getPropertyValue('font-family')
+        ), (result) ->
+          expect(result).to.have.string('Helvetica Neue')
