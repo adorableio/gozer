@@ -13,7 +13,7 @@ describe 'On page: http://localhost:4567 and', ->
   before (done) ->
     visitUrl 'http://localhost:4567', (pg) ->
       page = pg
-      done()
+      done() # Can we make this default behavior?
 
   describe 'testing HTML', ->
     it 'retrieves the page title', ->
