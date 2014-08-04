@@ -8,8 +8,15 @@ class Page
     @page = @page.then (page) ->
       Gozer.open(page, url)
 
-  run: (fn) ->
+  run: (fn, args) ->
     @page.then (page) ->
-      Gozer.evaluate(page, fn)
+      Gozer.evaluate(page, fn, args)
+
+  getStyle: (selector, property) ->
+    fn = (args) ->
+      [selector, property] = args
+      getComputedStyle(document.querySelector(selector)).getPropertyValue(property)
+
+    @run fn, [selector, property]
 
 module.exports = Page

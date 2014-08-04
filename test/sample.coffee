@@ -1,20 +1,23 @@
-Page = require('test/helpers/page')
+Page = require('./helpers/page')
 
-describe 'On page: http://localhost:4567 and', ->
+describe 'Gozer', ->
   page = new Page
 
   beforeEach ->
     page.visit('http://localhost:4567')
 
-  describe 'the HTML', ->
-    it 'has a title', ->
+  describe 'HTML tests', ->
+    it 'can evaluate the document markup', ->
       expect(page.run(-> document.title))
         .to.eventually.equal('MyWay!')
 
-  describe 'the CSS', ->
-    describe 'for the body', ->
-      it 'has a font-family', ->
-        fontFamily = page.run ->
-          getComputedStyle(document.body).getPropertyValue('font-family')
+  describe 'CSS tests', ->
+    it 'can manually retrieve computed styles', ->
+      fontFamily = page.run ->
+        getComputedStyle(document.body).getPropertyValue('font-family')
+      expect(fontFamily)
+        .to.eventually.have.string('Helvetica Neue')
 
-        expect(fontFamily).to.eventually.have.string('Helvetica Neue')
+    it 'can retrieve computed styles with a helper', ->
+      expect(page.getStyle('body', 'font-family'))
+        .to.eventually.have.string('Helvetica Neue')

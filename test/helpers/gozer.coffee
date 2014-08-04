@@ -20,8 +20,7 @@ module.exports =
       deferred.resolve(page)
     deferred.promise
 
-  evaluate: (page, fn) ->
+  evaluate: (page, fn, args) ->
     deferred = Q.defer()
-    page.evaluate fn, (result) ->
-      deferred.resolve(result)
+    page.evaluate fn, deferred.resolve, args
     deferred.promise
