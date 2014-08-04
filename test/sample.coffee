@@ -1,29 +1,20 @@
-expect = require('chai').expect
-phantom = require('phantom')
-
-visitUrl = (url, callback) ->
-  phantom.create (ph) ->
-    ph.createPage (page) ->
-      page.open url, (status) ->
-        callback(page)
+Page = require('test/helpers/page')
 
 describe 'On page: http://localhost:4567 and', ->
-  page = null
+  page = new Page
 
-  before (done) ->
-    visitUrl 'http://localhost:4567', (pg) ->
-      page = pg
-      done() # Can we make this default behavior?
+  beforeEach ->
+    page.visit('http://localhost:4567')
 
   describe 'the HTML', ->
     it 'has a title', ->
-      page.evaluate (-> document.title), (result) ->
-        expect(result).to.equal('MyWay!')
+      expect(page.run(-> document.title))
+        .to.eventually.equal('MyWay!')
 
   describe 'the CSS', ->
     describe 'for the body', ->
       it 'has a font-family', ->
-        page.evaluate (->
+        fontFamily = page.run ->
           getComputedStyle(document.body).getPropertyValue('font-family')
-        ), (result) ->
-          expect(result).to.have.string('Helvetica Neue')
+
+        expect(fontFamily).to.eventually.have.string('Helvetica Neue')
