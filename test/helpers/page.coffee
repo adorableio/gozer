@@ -12,6 +12,11 @@ class Page
     @page.then (page) ->
       Gozer.evaluate(page, fn, args)
 
+  resize: (dimensions) ->
+    dimensions.height ?= 768
+    @page.then (page) ->
+      page.set('viewportSize', dimensions)
+
   getStyle: (selector, property) ->
     fn = (args) ->
       [selector, property] = args

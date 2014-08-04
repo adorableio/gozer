@@ -5,6 +5,7 @@ describe 'Gozer', ->
 
   beforeEach ->
     page.visit('http://localhost:4567')
+    page.resize(width: '1024')
 
   describe 'HTML tests', ->
     it 'can evaluate the document markup', ->
@@ -21,3 +22,13 @@ describe 'Gozer', ->
     it 'can retrieve computed styles with a helper', ->
       expect(page.getStyle('body', 'font-family'))
         .to.eventually.have.string('Helvetica Neue')
+
+    describe 'with breakpoints', ->
+      it 'retrieves the computed style', ->
+        expect(page.getStyle('body', 'font-size'))
+          .to.eventually.equal('16px')
+
+        page.resize(width: 100)
+
+        expect(page.getStyle('body', 'font-size'))
+          .to.eventually.equal('12px')
