@@ -1,6 +1,3 @@
-chai = require('chai')
-expect = chai.expect
-chai.use(require('chai-as-promised'))
 Page = require('test/helpers/page')
 
 describe 'On page: http://localhost:4567 and', ->
