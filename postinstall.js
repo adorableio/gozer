@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-var runCommand = require('run-command'),
-    dotenv     = require('dotenv');
+var runCommand = require('run-command');
 
 runCommand("gulp");
