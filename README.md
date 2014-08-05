@@ -1,19 +1,32 @@
-# Middleman starting point
+# gozer
+
+### Includes
+* Node
+* Express
+* Bower
+  * jQuery
+  * Ember
+  * Handlebars
+* Gulp
+* Browserify
+* Stylus
+* Coffeescript
+
+### Setup
+
+1. Clone this repo
+2. run `npm install`
 
 
-## Setup
+### Running
 
-```bash
-bower install
-npm install
-bundle install
-bundle exec middleman
-```
+1. For asset generation: `gulp watch`
+2. Run the server: `npm start`
+3. Browse to: `http://localhost:3002`
 
 
-## Test
+### Deploying
 
-```bash
-npm test
-```
-
+1. Create your heroku instance `heroku create`
+2. Deploy `git push heroku master`
+3. Dance.

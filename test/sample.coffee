@@ -4,13 +4,13 @@ describe 'Gozer', ->
   page = new Page
 
   beforeEach ->
-    page.visit('http://localhost:4567')
+    page.visit('http://localhost:3002')
     page.resize(width: '1024')
 
   describe 'HTML tests', ->
     it 'can evaluate the document markup', ->
       expect(page.run(-> document.title))
-        .to.eventually.equal('MyWay!')
+        .to.eventually.equal('Gozer')
 
   describe 'CSS tests', ->
     it 'can manually retrieve computed styles', ->
@@ -28,7 +28,7 @@ describe 'Gozer', ->
         expect(page.getStyle('body', 'font-size'))
           .to.eventually.equal('16px')
 
-        page.resize(width: 100)
+        page.resize(width: 600)
 
         expect(page.getStyle('body', 'font-size'))
           .to.eventually.equal('12px')

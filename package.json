@@ -1,28 +1,54 @@
 {
-  "name": "tecsst",
-  "version": "0.0.0",
-  "description": "## Run the server",
-  "main": "index.js",
-  "scripts": {
-    "test": "node_modules/.bin/mocha"
+  "name": "gozer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.coffee",
+  "engines": {
+    "node": "0.10.x"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:itsthatguy/tecsst.git"
+  "scripts": {
+    "test": "node_modules/.bin/mocha",
+    "start": "node_modules/.bin/nodemon start.js",
+    "postinstall": "node postinstall.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "coffee-script": "^1.7.1"
-  },
-  "devDependencies": {
+    "bower": "^1.3.2",
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
+    "coffee-script": "^1.7.1",
+    "coffeeify": "^0.6.0",
+    "colors": "^0.6.2",
+    "del": "^0.1.1",
+    "ejs": "^1.0.0",
+    "express": "^4.0.0",
+    "find-port": "^1.0.0",
+    "gulp": "^3.8.5",
+    "gulp-browserify": "^0.5.0",
+    "gulp-coffee": "^1.4.3",
+    "gulp-ejs": "^0.2.2",
+    "gulp-livereload": "^2.1.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-stylus": "^0.1.0",
+    "gulp-util": "^2.2.14",
+    "media-typer": "^0.2.0",
     "mocha": "^1.20.1",
+    "nodemon": "^1.2.0",
     "phantom": "^0.6.5",
     "phantomjs": "^1.9.7-14",
+    "q": "^1.0.1",
     "run-command": "^0.1.4",
+    "serve-favicon": "^2.0.1",
     "should": "^4.0.4",
-    "q": "^1.0.1"
+    "stylus": "^0.42.3",
+    "win-spawn": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adorableio/teccst.git"
+  },
+  "devDependencies": {
+    "run-sequence": "^0.3.6"
   }
 }
