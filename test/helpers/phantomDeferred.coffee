@@ -17,7 +17,11 @@ module.exports =
   open: (page, url) ->
     deferred = Q.defer()
     page.open url, (status) ->
-      deferred.resolve(page)
+      if status == 'success'
+        deferred.resolve(page)
+      else
+        error = new Error("Cannot connect to #{url}, is the server running?")
+        deferred.reject(error)
     deferred.promise
 
   evaluate: (page, fn, args) ->
