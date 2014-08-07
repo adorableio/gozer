@@ -1,6 +1,6 @@
 PhantomDeferred = require('./phantomDeferred')
 
-class Page
+class Gozer
   constructor: ->
     @page = PhantomDeferred.create().then(PhantomDeferred.createPage)
 
@@ -24,4 +24,4 @@ class Page
 
     @run fn, [selector, property]
 
-module.exports = Page
+module.exports = Gozer

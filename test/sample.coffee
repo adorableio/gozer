@@ -1,7 +1,7 @@
-Page = require('./helpers/page')
+Gozer = require('./helpers/gozer')
 
 describe 'Gozer', ->
-  page = new Page
+  page = new Gozer
 
   beforeEach ->
     page.visit('http://localhost:3002')
