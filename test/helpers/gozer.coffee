@@ -1,26 +1,34 @@
-phantom = require('phantom')
-Q = require('q')
+PhantomD = require('./phantomDeferred')
 
-module.exports =
-  create: ->
-    deferred = Q.defer()
-    phantom.create (ph) ->
-      deferred.resolve(ph)
-    deferred.promise
+class Gozer
+  constructor: (options = {}) ->
+    @host = options.host || 'localhost'
+    @port = options.port || 80
 
-  createPage: (ph) ->
-    deferred = Q.defer()
-    ph.createPage (page, err) ->
-      deferred.resolve(page)
-    deferred.promise
+    @baseUrl = "http://#{@host}:#{@port}"
+    @page = PhantomD.create().then(PhantomD.createPage)
 
-  open: (page, url) ->
-    deferred = Q.defer()
-    page.open url, (status) ->
-      deferred.resolve(page)
-    deferred.promise
+  visit: (path) ->
+    url = @baseUrl + path
+    @page = @page.then (page) ->
+      PhantomD.open(page, url)
+    @
 
-  evaluate: (page, fn, args) ->
-    deferred = Q.defer()
-    page.evaluate fn, deferred.resolve, args
-    deferred.promise
+  resize: (dimensions) ->
+    dimensions.height ?= 768
+    @page.then (page) ->
+      page.set('viewportSize', dimensions)
+    @
+
+  run: (fn, args) ->
+    @page.then (page) ->
+      PhantomD.evaluate(page, fn, args)
+
+  getStyle: (selector, property) ->
+    fn = (args) ->
+      [selector, property] = args
+      getComputedStyle(document.querySelector(selector)).getPropertyValue(property)
+
+    @run fn, [selector, property]
+
+module.exports = Gozer
