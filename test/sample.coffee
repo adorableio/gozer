@@ -1,12 +1,12 @@
 Gozer = require('./helpers/gozer')
 
 describe 'Gozer', ->
-  gozer = new Gozer
+  gozer = new Gozer(port: 3002)
   page = null
 
   beforeEach ->
     page = gozer
-      .visit('http://localhost:3002')
+      .visit('/')
       .resize(width: '1024')
 
   describe 'HTML tests', ->

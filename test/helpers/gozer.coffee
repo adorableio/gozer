@@ -1,10 +1,15 @@
 PhantomD = require('./phantomDeferred')
 
 class Gozer
-  constructor: ->
+  constructor: (options = {}) ->
+    @host = options.host || 'localhost'
+    @port = options.port || 80
+
+    @baseUrl = "http://#{@host}:#{@port}"
     @page = PhantomD.create().then(PhantomD.createPage)
 
-  visit: (url) ->
+  visit: (path) ->
+    url = @baseUrl + path
     @page = @page.then (page) ->
       PhantomD.open(page, url)
     @
