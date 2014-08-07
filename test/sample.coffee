@@ -1,8 +1,10 @@
 Gozer = require('./helpers/gozer')
 
 describe 'Gozer', ->
-  gozer = new Gozer(port: 3002)
-  page = null
+  gozer = page = null
+
+  before ->
+    gozer = new Gozer(port: 3002)
 
   beforeEach ->
     page = gozer
