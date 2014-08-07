@@ -2,7 +2,7 @@
   "name": "gozer",
   "version": "0.0.1",
   "description": "",
-  "main": "app.coffee",
+  "main": "lib/gozer.coffee",
   "engines": {
     "node": "0.10.x"
   },
@@ -49,6 +49,7 @@
     "url": "https://github.com/adorableio/teccst.git"
   },
   "devDependencies": {
+    "gulp-mocha": "^0.5.2",
     "run-sequence": "^0.3.6"
   }
 }

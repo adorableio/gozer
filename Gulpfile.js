@@ -2,11 +2,12 @@
 // Gulpfile.js
 // Require the needed packages
 var gulp         = require('gulp'),
+    browserify   = require('gulp-browserify'),
     ejs          = require('gulp-ejs'),
+    mocha        = require('gulp-mocha'),
     gutil        = require('gulp-util'),
     rename       = require('gulp-rename'),
     stylus       = require('gulp-stylus'),
-    browserify   = require('gulp-browserify'),
     path         = require('path'),
     colors       = require('colors');
 
@@ -14,8 +15,7 @@ var del, livereload, runSequence;
 
 if (process.env.NODE_ENV == "development") {
   del         = require('del'),
-  runSequence = require('run-sequence'),
-  findPort    = require('find-port');
+  runSequence = require('run-sequence');
 }
 
 var baseAppPath = path.join(__dirname, 'app'),
@@ -49,31 +49,32 @@ var watchPaths = {
   ejs: paths.ejsPath
 }
 
-var testFiles = [
-  '.generated/js/app.js',
-  'test/client/*.js'
-];
 
+//
+// Test
+//
+var testFiles = ['test/sample.coffee'];
 
 gulp.task('test', function() {
-  // Be sure to return the stream
-  return gulp.src(testFiles)
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
+  // NOTE: gulp-mocha does not check mocha.opts, so defining opts manually
+  return gulp.src(testFiles, { read: false })
+    .pipe(mocha({
+      compilers: 'coffee:coffee-script',
+      timeout: '20s',
+      reporter: 'spec',
+      ui: 'bdd',
+      globals: {
+        should: require('should'),
+        coffee: require('coffee-script/register'),
+        helper: require('./test/test_helper')
+      }
+  }));
 });
 
 
 //
 // Stylus
 //
-
-
 // Get and render all .styl files recursively
 gulp.task('stylus', function () {
   return gulp.src(paths.cssInput)
@@ -87,7 +88,6 @@ gulp.task('stylus', function () {
 //
 // Coffee
 //
-
 gulp.task('coffee', function() {
   return gulp.src(paths.coffeeInput, { read: false })
     .pipe(browserify({
@@ -104,7 +104,6 @@ gulp.task('coffee', function() {
 //
 // EJS
 //
-
 gulp.task('ejs', function() {
   return gulp.src(paths.ejsPath)
     .pipe(ejs()
@@ -117,7 +116,6 @@ gulp.task('ejs', function() {
 //
 // Static Assets
 //
-
 gulp.task('assets', function() {
   return gulp.src(paths.assetsPaths, {base: paths.assetsBasePath})
     .on('error', gutil.log)
