@@ -1,11 +1,13 @@
 Gozer = require('./helpers/gozer')
 
 describe 'Gozer', ->
-  page = new Gozer
+  gozer = new Gozer
+  page = null
 
   beforeEach ->
-    page.visit('http://localhost:3002')
-    page.resize(width: '1024')
+    page = gozer
+      .visit('http://localhost:3002')
+      .resize(width: '1024')
 
   describe 'HTML tests', ->
     it 'can evaluate the document markup', ->

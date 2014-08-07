@@ -7,6 +7,7 @@ class Gozer
   visit: (url) ->
     @page = @page.then (page) ->
       PhantomD.open(page, url)
+    @
 
   run: (fn, args) ->
     @page.then (page) ->
@@ -16,6 +17,7 @@ class Gozer
     dimensions.height ?= 768
     @page.then (page) ->
       page.set('viewportSize', dimensions)
+    @
 
   getStyle: (selector, property) ->
     fn = (args) ->
