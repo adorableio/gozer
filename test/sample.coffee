@@ -1,4 +1,4 @@
-Gozer = require('./helpers/gozer')
+Gozer = require('../lib/gozer')
 
 describe 'Gozer', ->
   gozer = page = null
