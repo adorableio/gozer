@@ -1,16 +1,16 @@
-PhantomDeferred = require('./phantomDeferred')
+PhantomD = require('./phantomDeferred')
 
 class Gozer
   constructor: ->
-    @page = PhantomDeferred.create().then(PhantomDeferred.createPage)
+    @page = PhantomD.create().then(PhantomD.createPage)
 
   visit: (url) ->
     @page = @page.then (page) ->
-      PhantomDeferred.open(page, url)
+      PhantomD.open(page, url)
 
   run: (fn, args) ->
     @page.then (page) ->
-      PhantomDeferred.evaluate(page, fn, args)
+      PhantomD.evaluate(page, fn, args)
 
   resize: (dimensions) ->
     dimensions.height ?= 768
