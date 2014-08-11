@@ -1,9 +1,16 @@
-Gozer = require('../lib/gozer')
+express = require('express')
+Gozer = require('../src/gozer')
+
+startServer = (options = {}) ->
+  app = express()
+  app.use(express.static(__dirname + '/app'))
+  app.listen(options.port || 80)
 
 describe 'Gozer', ->
   gozer = page = null
 
   before ->
+    startServer(port: 3002)
     gozer = new Gozer(port: 3002)
 
   beforeEach ->
