@@ -1,15 +1,15 @@
 {
   "name": "gozer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "lib/gozer",
   "engines": {
     "node": "0.10.x"
   },
   "scripts": {
-    "build":        "node_modules/.bin/coffee --bare --compile --output lib/gozer src/*.coffee",
-    "prepublish":   "node_modules/.bin/coffee --bare --compile --output lib/gozer src/*.coffee",
-    "postpublish":  "rm -rf lib",
+    "build": "node_modules/.bin/coffee --bare --compile --output lib/gozer src/*.coffee",
+    "prepublish": "node_modules/.bin/coffee --bare --compile --output lib/gozer src/*.coffee",
+    "postpublish": "rm -rf lib",
     "test": "node_modules/.bin/mocha"
   },
   "author": "",
