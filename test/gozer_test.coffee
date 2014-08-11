@@ -1,5 +1,5 @@
 express = require('express')
-Gozer = require('../lib/gozer')
+Gozer = require('../src/gozer')
 
 startServer = (options = {}) ->
   app = express()
