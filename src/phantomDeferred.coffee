@@ -1,10 +1,11 @@
 phantom = require('phantom')
+phantomPath = require('phantomjs').path
 Q = require('q')
 
 module.exports =
   create: ->
     deferred = Q.defer()
-    phantom.create (ph) ->
+    phantom.create binary: phantomPath, (ph) ->
       deferred.resolve(ph)
     deferred.promise
 
