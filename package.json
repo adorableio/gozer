@@ -1,6 +1,6 @@
 {
   "name": "gozer",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "A phantomJS wrapper for testing your CSS",
   "author": "Ryland Herrick <a@rylnd.com>",
   "contributors": [
