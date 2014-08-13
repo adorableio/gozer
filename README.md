@@ -22,7 +22,7 @@ page
 ```
 
 but that's not why we built it. We built gozer to _test our CSS_, so it really shines when it's used in a test framework.
-Here's an example using [mocha](http://visionmedia.github.io/mocha/) and[chai-as-promised](https://github.com/domenic/chai-as-promised/):
+Here's an example using [mocha](http://visionmedia.github.io/mocha/) and [chai-as-promised](https://github.com/domenic/chai-as-promised/):
 
 ```javascript
 var Gozer = require('gozer');
