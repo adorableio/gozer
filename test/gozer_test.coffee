@@ -34,11 +34,12 @@ describe 'Gozer', ->
       expect(page.getStyle('body', 'font-family'))
         .to.eventually.have.string('Helvetica Neue')
 
-    context 'with breakpoints', ->
+    describe 'breakpoints', ->
       it 'retrieves the computed style', ->
         expect(page.getStyle('body', 'font-size'))
           .to.eventually.equal('16px')
 
+      it 'retrieves the computed style at a different breakpoint', ->
         page.resize(width: 600)
 
         expect(page.getStyle('body', 'font-size'))
