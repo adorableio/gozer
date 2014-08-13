@@ -1,14 +1,23 @@
 {
   "name": "gozer",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A phantomJS wrapper for testing your CSS",
   "author": "Ryland Herrick <a@rylnd.com>",
   "contributors": [
     "Kevin Altman <kevin@itsthatguy.com>"
   ],
   "keywords": [
-    "css", "html", "integration", "phantom", "phantomjs",
-    "spec", "specs", "test", "testing", "tests", "unit"
+    "css",
+    "html",
+    "integration",
+    "phantom",
+    "phantomjs",
+    "spec",
+    "specs",
+    "test",
+    "testing",
+    "tests",
+    "unit"
   ],
   "main": "lib/gozer",
   "scripts": {
