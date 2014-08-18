@@ -9,38 +9,47 @@ startServer = (options = {}) ->
 describe 'Gozer', ->
   gozer = page = null
 
-  before ->
+  before (done) ->
     startServer(port: 3002)
-    gozer = new Gozer(port: 3002)
+    gozer = new Gozer(port: 3002, done: done)
 
-  beforeEach ->
-    page = gozer
-      .visit('/')
-      .resize(width: '1024')
+  beforeEach (done) ->
+    gozer.visit '/', (pg) ->
+      page = pg
+      page.resize(width: '1024')
+      done()
+
 
   describe 'HTML tests', ->
-    it 'can evaluate the document markup', ->
-      expect(page.run(-> document.title))
-        .to.eventually.equal('Gozer')
+    it 'can evaluate the document markup', (done) ->
+      page.run (->
+        document.title
+      ), (title) ->
+        expect(title).to.equal('Gozer')
+        done()
 
   describe 'CSS tests', ->
-    it 'can manually retrieve computed styles', ->
-      fontFamily = page.run ->
+    it 'can manually retrieve computed styles', (done)->
+      page.run (->
         getComputedStyle(document.body).getPropertyValue('font-family')
-      expect(fontFamily)
-        .to.eventually.have.string('Helvetica Neue')
+      ), (fontFamily) ->
+        expect(fontFamily).to.have.string('Helvetica Neue')
+        done()
 
-    it 'can retrieve computed styles with a helper', ->
-      expect(page.getStyle('body', 'font-family'))
-        .to.eventually.have.string('Helvetica Neue')
+    it 'can retrieve computed styles with a helper', (done) ->
+      page.getStyle 'body', 'font-family', (fontFamily) ->
+        expect(fontFamily).to.have.string('Helvetica Neue')
+        done()
 
     describe 'breakpoints', ->
-      it 'retrieves the computed style', ->
-        expect(page.getStyle('body', 'font-size'))
-          .to.eventually.equal('16px')
+      it 'retrieves the computed style', (done) ->
+        page.getStyle 'body', 'font-size', (fontSize) ->
+          expect(fontSize).to.equal('16px')
+          done()
 
-      it 'retrieves the computed style at a different breakpoint', ->
+      it 'retrieves the computed style at a different breakpoint', (done) ->
         page.resize(width: 600)
 
-        expect(page.getStyle('body', 'font-size'))
-          .to.eventually.equal('12px')
+        page.getStyle 'body', 'font-size', (fontSize) ->
+          expect(fontSize).to.equal('12px')
+          done()

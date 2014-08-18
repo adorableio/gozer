@@ -1,34 +1,40 @@
-PhantomD = require('./phantomDeferred')
+Phantom = require('phantom')
+phantomPath = require('phantomjs').path
 
 class Gozer
   constructor: (options = {}) ->
     @host = options.host || 'localhost'
     @port = options.port || 80
+    done = options.done || (->)
 
     @baseUrl = "http://#{@host}:#{@port}"
-    @page = PhantomD.create().then(PhantomD.createPage)
 
-  visit: (path) ->
+    Phantom.create (ph) ->
+      ph.createPage (page) =>
+        @page = page
+        done()
+
+  visit: (path, callback) ->
     url = @baseUrl + path
-    @page = @page.then (page) ->
-      PhantomD.open(page, url)
-    @
+    page.open url, (status) =>
+      if status != 'success'
+        throw new Error("Cannot connect to #{url}, is the server running?")
+
+      @page = page
+      callback(@)
 
   resize: (dimensions) ->
     dimensions.height ?= 768
-    @page.then (page) ->
-      page.set('viewportSize', dimensions)
-    @
+    @page.set('viewportSize', dimensions)
 
-  run: (fn, args) ->
-    @page.then (page) ->
-      PhantomD.evaluate(page, fn, args)
+  run: (fn, callback, args) ->
+    @page.evaluate(fn, callback, args)
 
-  getStyle: (selector, property) ->
+  getStyle: (selector, property, callback) ->
     fn = (args) ->
       [selector, property] = args
       getComputedStyle(document.querySelector(selector)).getPropertyValue(property)
 
-    @run fn, [selector, property]
+    @run fn, callback, [selector, property]
 
 module.exports = Gozer
