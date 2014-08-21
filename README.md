@@ -1,5 +1,7 @@
 # gozer
 
+![Gozer](https://raw.githubusercontent.com/wiki/adorableio/gozer/images/gozer.png)
+
 gozer is a phantomJS wrapper. It can do normal phantomJS stuff, using promises:
 
 ```javascript
