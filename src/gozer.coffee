@@ -14,11 +14,14 @@ class Gozer
       PhantomD.open(page, url)
     @
 
+  set: (property, value) ->
+    @page.then (page) ->
+      page.set(property, value)
+    @
+
   resize: (dimensions) ->
     dimensions.height ?= 768
-    @page.then (page) ->
-      page.set('viewportSize', dimensions)
-    @
+    @set('viewportSize', dimensions)
 
   run: (fn, args) ->
     @page.then (page) ->
