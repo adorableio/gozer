@@ -27,22 +27,26 @@ class Gozer
     @page.then (page) ->
       PhantomD.evaluate(page, fn, args)
 
-  getStyle: (selector, property) ->
+  getStyle: (selector, property, options={}) ->
     fn = (args) ->
       [selector, property] = args
       getComputedStyle(document.querySelector(selector)).getPropertyValue(property)
 
-    @run fn, [selector, property]
+    @run(fn, [selector, property])
+      .then (retrievedProperty) =>
+        if property in ['color', 'background-color']
+          @_parseColor(retrievedProperty, options)
+        else
+          retrievedProperty
 
-  getColor: (selector, options={}) ->
+
+  _parseColor: (color, options={}) ->
     options.type ?= 'hex'
 
-    @getStyle(selector, 'color')
-      .then (color) =>
-        if options.type == 'hex' && color.match(/^rgb/)
-          @_rgbToHex(color)
-        else
-          color
+    if options.type == 'hex' && color.match(/^rgb/)
+      @_rgbToHex(color)
+    else
+      color
 
   _rgbToHex: (rgbString) ->
     '#' + rgbString

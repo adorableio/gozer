@@ -45,11 +45,11 @@ describe 'Gozer', ->
         expect(page.getStyle('body', 'font-size'))
           .to.eventually.equal('12px')
 
-    describe '#getColor', ->
+    describe 'retrieving colors', ->
       it 'returns hex strings by default', ->
-        expect(page.getColor('body'))
+        expect(page.getStyle('body', 'background-color'))
           .to.eventually.equal('#E7E8EA')
 
       it 'returns rgb strings if requested', ->
-        expect(page.getColor('body', type: 'rgb'))
+        expect(page.getStyle('body', 'background-color', type: 'rgb'))
           .to.eventually.equal('rgb(231, 232, 234)')

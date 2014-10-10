@@ -1,7 +1,7 @@
 body {
   font-family: 'Helvetica Neue';
   font-size: 16px;
-  color: #e7e8ea;
+  background-color: #e7e8ea;
 }
 
 @media (max-width: 600px) {
