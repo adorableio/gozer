@@ -34,4 +34,24 @@ class Gozer
 
     @run fn, [selector, property]
 
+  getColor: (selector, options={}) ->
+    options.type ?= 'hex'
+
+    @getStyle(selector, 'color')
+      .then (color) =>
+        if options.type == 'hex' && color.match(/^rgb/)
+          @_rgbToHex(color)
+        else
+          color
+
+  _rgbToHex: (rgbString) ->
+    '#' + rgbString
+      .replace(/[rgb()]/g, '')
+      .split(',')
+      .map(Number)
+      .map (int) -> int.toString(16)
+      .map (hexString) -> "0#{hexString}".slice(-2)
+      .join('')
+      .toUpperCase()
+
 module.exports = Gozer
