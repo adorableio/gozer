@@ -50,8 +50,9 @@ class Gozer
 
   _rgbToHex: (rgbString) ->
     '#' + rgbString
-      .replace(/[rgb()]/g, '')
+      .replace(/[rgba()]/g, '')
       .split(',')
+      .slice(-3)
       .map(Number)
       .map (int) -> int.toString(16)
       .map (hexString) -> "0#{hexString}".slice(-2)

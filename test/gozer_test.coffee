@@ -53,3 +53,7 @@ describe 'Gozer', ->
       it 'returns rgb strings if requested', ->
         expect(page.getStyle('body', 'background-color', type: 'rgb'))
           .to.eventually.equal('rgb(231, 232, 234)')
+
+      it 'returns rgba colors as hex', ->
+        expect(page.getStyle('body', 'color'))
+          .to.eventually.equal('#1E282C')
