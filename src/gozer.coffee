@@ -34,7 +34,7 @@ class Gozer
 
     @run(fn, [selector, property])
       .then (retrievedProperty) =>
-        if property in ['color', 'background-color']
+        if retrievedProperty.match(/^rgb/)
           @_parseColor(retrievedProperty, options)
         else
           retrievedProperty
