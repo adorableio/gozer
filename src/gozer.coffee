@@ -39,13 +39,19 @@ class Gozer
         else
           retrievedProperty
 
-  _parseColor: (color, options={}) ->
+  _parseColor: (cssValue, options={}) ->
     options.type ?= 'hex'
 
-    if options.type == 'hex'
-      @_rgbToHex(color)
-    else
-      color
+    return cssValue if options.type != 'hex'
+
+    cssValue
+      .match(/[^(]*\([^)]*\)|[^\s]+/g) # tokenize multi-value properties
+      .map (value) =>
+        if value.match(/^rgb/)
+          @_rgbToHex(value)
+        else
+          value
+      .join(' ')
 
   _rgbToHex: (rgbString) ->
     '#' + rgbString

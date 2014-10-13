@@ -57,3 +57,7 @@ describe 'Gozer', ->
       it 'returns rgba colors as hex', ->
         expect(page.getStyle('body', 'color'))
           .to.eventually.equal('#1E282C')
+
+      it 'parses colors out of more complex properties', ->
+        expect(page.getStyle('body', 'text-shadow'))
+          .to.eventually.equal('#FFDAB9 1px 2px 3px')

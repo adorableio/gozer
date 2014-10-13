@@ -3,6 +3,7 @@ body {
   font-size: 16px;
   background-color: #e7e8ea;
   color: rgba(20, 30, 40, 0.5);
+  text-shadow: 1px 2px 3px peachpuff;
 }
 
 @media (max-width: 600px) {
