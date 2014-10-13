@@ -43,7 +43,7 @@ class Gozer
   _parseColor: (color, options={}) ->
     options.type ?= 'hex'
 
-    if options.type == 'hex' && color.match(/^rgb/)
+    if options.type == 'hex'
       @_rgbToHex(color)
     else
       color
