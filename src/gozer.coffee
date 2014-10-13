@@ -39,7 +39,6 @@ class Gozer
         else
           retrievedProperty
 
-
   _parseColor: (color, options={}) ->
     options.type ?= 'hex'
 
