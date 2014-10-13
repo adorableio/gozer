@@ -27,11 +27,41 @@ class Gozer
     @page.then (page) ->
       PhantomD.evaluate(page, fn, args)
 
-  getStyle: (selector, property) ->
+  getStyle: (selector, property, options={}) ->
     fn = (args) ->
       [selector, property] = args
       getComputedStyle(document.querySelector(selector)).getPropertyValue(property)
 
-    @run fn, [selector, property]
+    @run(fn, [selector, property])
+      .then (retrievedProperty) =>
+        if retrievedProperty.match(/^rgb/)
+          @_parseColor(retrievedProperty, options)
+        else
+          retrievedProperty
+
+  _parseColor: (cssValue, options={}) ->
+    options.type ?= 'hex'
+
+    return cssValue if options.type != 'hex'
+
+    cssValue
+      .match(/[^(]*\([^)]*\)|[^\s]+/g) # tokenize multi-value properties
+      .map (value) =>
+        if value.match(/^rgb/)
+          @_rgbToHex(value)
+        else
+          value
+      .join(' ')
+
+  _rgbToHex: (rgbString) ->
+    '#' + rgbString
+      .replace(/[rgba()]/g, '')
+      .split(',')
+      .slice(-3)
+      .map(Number) # RGB Ints
+      .map (int) -> int.toString(16) # Hex Strings
+      .map (hexString) -> "0#{hexString}".slice(-2) # 0-padded
+      .join('')
+      .toUpperCase()
 
 module.exports = Gozer

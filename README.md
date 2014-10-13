@@ -1,4 +1,5 @@
 # gozer
+[![Build Status](https://travis-ci.org/adorableio/gozer.svg?branch=master)](https://travis-ci.org/adorableio/gozer)
 
 ![Gozer](https://raw.githubusercontent.com/wiki/adorableio/gozer/images/gozer.png)
 
