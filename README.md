@@ -1,6 +1,7 @@
 # gozer
 
 ![Gozer](https://raw.githubusercontent.com/wiki/adorableio/gozer/images/gozer.png)
+[![Build Status](https://travis-ci.org/adorableio/gozer.svg?branch=master)](https://travis-ci.org/adorableio/gozer)
 
 gozer is a phantomJS wrapper. It can do normal phantomJS stuff, using promises:
 
