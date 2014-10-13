@@ -53,9 +53,9 @@ class Gozer
       .replace(/[rgba()]/g, '')
       .split(',')
       .slice(-3)
-      .map(Number)
-      .map (int) -> int.toString(16)
-      .map (hexString) -> "0#{hexString}".slice(-2)
+      .map(Number) # RGB Ints
+      .map (int) -> int.toString(16) # Hex Strings
+      .map (hexString) -> "0#{hexString}".slice(-2) # 0-padded
       .join('')
       .toUpperCase()
 
